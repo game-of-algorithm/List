@@ -49,7 +49,7 @@
 #### Demo列表
 
 [双向链表](doublyList/doublyList.go)
-
+[下压堆栈链表实现](stack/stack.go)
 
 ### 应用场景
 
