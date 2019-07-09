@@ -50,6 +50,7 @@
 
 [双向链表](doublyList/doublyList.go)
 [下压堆栈链表实现](stack/stack.go)
+[链表实现LRU算法](lru/lru.go)
 
 ### 应用场景
 
@@ -71,4 +72,6 @@
 
 #### 代码实现
 
-TODO
+TODO 还未完成
+
+[链表实现LRU算法](lru/lru.go)
