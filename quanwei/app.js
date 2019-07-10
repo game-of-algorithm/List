@@ -6,6 +6,7 @@ server.listen(4000)
 
 require('./链表/6-相交链表.js')
 require('./链表/3-单向链表.js')
+require('./链表/4-双向链表.js')
 require('./链表/5-循环链表.js')
 
 // console.info('listen 4000')
