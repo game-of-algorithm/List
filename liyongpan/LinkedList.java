@@ -37,7 +37,7 @@ public class LinkedList<T> {
 		next.prve.prve.next = node;
 		n++;
 	}
-	
+
 	public void addLast (T item) {
 		Node<T> old = last;
 		last = new Node<T>();
@@ -57,7 +57,7 @@ public class LinkedList<T> {
 		n--;
 		return item;
 	}
-	
+
 	public T removeLast () throws Exception {
 		if (isEmpty()) throw new Exception("List is empty");
 		T item = last.item;
@@ -67,7 +67,7 @@ public class LinkedList<T> {
 		n--;
 		return item;
 	}
-	
+
 	public T remove (int index) throws Exception {
 		if (index >= n) throw new Exception("index out");
 		// 首尾直接删
@@ -88,6 +88,7 @@ public class LinkedList<T> {
 		if (index >= n) throw new Exception("index out");
 		return getNode(index).item;
 	}
+
 	public Node<T> getNode (int index) {
 		Node<T> temp = null;
 		// 离首尾远近不同查找方向也不同
@@ -113,12 +114,25 @@ public class LinkedList<T> {
 		return n;
 	}
 
+	public void clear () {
+		while (first != null) {
+			Node<T> next = first.next;
+			first.next = null;
+			first.prve = null;
+			first.item = null;
+			first = next;
+		}
+		n = 0;
+		first = null;
+		last = null;
+	}
+
 	private static class Node<T> {
 		private T item;
 		private Node<T> prve;
 		private Node<T> next;
 	}
-	
+
 	public static void main(String[] args) throws Exception {
 		LinkedList<String> l = new LinkedList<String>();
 		l.add("123");
