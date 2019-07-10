@@ -72,8 +72,6 @@
 
 #### 代码实现
 
-TODO 还未完成
-
 [链表实现LRU算法](lru/lru.go)
 
 #### TimeWheel时间轮
