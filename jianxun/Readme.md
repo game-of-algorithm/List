@@ -75,3 +75,10 @@
 TODO 还未完成
 
 [链表实现LRU算法](lru/lru.go)
+
+#### TimeWheel时间轮
+
+高效的定时器算法，Apache Pulsar,去哪儿QMQ的定时消息都是基于这个实现
+
+* [论文](http://www.cs.columbia.edu/~nahum/w6998/papers/ton97-timing-wheels.pdf)
+* [资料](https://www.codetd.com/article/4466036)
