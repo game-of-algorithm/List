@@ -1,5 +1,5 @@
 
-public class Test{
+public class StackTest {
     public static void main(String[] args) {
         MStack<Integer> s = new MStack<Integer>();
         s.push(1);
