@@ -19,10 +19,15 @@ fun main(args: Array<String>) {
     }
     var sortHead:ListNode? = SortNodeList().sortList(head)
 
+    printNode(sortHead)
+}
+
+fun printNode(sortHead: ListNode?) {
+    var sortHead1 = sortHead
     val builder = StringBuilder()
-    while (sortHead!= null){
-        builder.append(sortHead.`val`).append("  ")
-        sortHead = sortHead.next
+    while (sortHead1 != null) {
+        builder.append(sortHead1.`val`).append("  ")
+        sortHead1 = sortHead1.next
     }
 
     print(builder.toString())
