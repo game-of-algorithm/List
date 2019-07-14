@@ -1,3 +1,4 @@
+import javafx.util.Pair;
 
 public class StackTest {
     public static void main(String[] args) {
@@ -12,7 +13,6 @@ public class StackTest {
         System.out.println(s.toString());
         while (s.pop()!= null){}
         System.out.println(s.toString());
-
     }
 
     interface IStack<T>{
