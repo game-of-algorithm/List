@@ -1,5 +1,5 @@
-class DoubleLinkedList {
-    constructor() {
+export default class DoubleLinkedList {
+    constructor () {
         this.head = null
         this.size = 0
     }
@@ -79,6 +79,22 @@ class DoubleLinkedList {
         this.size -= 1
         return true
     }
+    removeNode (node) {
+        let i = 0
+        let currentNode = this.head
+        while ( node !== currentNode ) {
+            currentNode = currentNode.nextNode
+            i++
+        }
+        if (node) {
+            node.preNode.nextNode = node.nextNode
+            if (node.nextNode) {
+                node.nextNode.preNode = node.preNode
+            }
+        }
+        this.size -= 1
+        return node
+    }
     getNode (index) {
         let i = 0
         let currentNode = this.head
@@ -96,26 +112,9 @@ class Node {
         this.nextNode = nextNode
     }
 }
-const list = new DoubleLinkedList()
-list.add(0, 1)
-list.add(1, 2)
-list.add(1, 3)
-list.add(1, 4)
-list.add(2, 9)
-list.add(2, 8)
-list.add(3, 7)
-list.add(0, 0)
-list.remove(0)
-list.remove(2)
-list.remove(1)
-list.add(1, 4)
-list.remove(8)
-list.remove(5)
-let i = 0
-let head = list.head
-console.log(head.value)
-while (i < list.size - 1) {
-    head = head.nextNode
-    console.log(head.value)
-    i++
-}
+
+
+
+
+
+
