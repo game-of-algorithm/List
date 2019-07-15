@@ -6,7 +6,7 @@
 //  Copyright © 2019 纪奥宁. All rights reserved.
 //
 
-#include "Link_Algorithm.h"
+#include <stdio.h>
 
 
 struct ListNode {
@@ -96,8 +96,7 @@ struct ListNode* removeNthFromEnd1(struct ListNode* head, int n){
 }
 
 
-/**排序链表*/
-
+/**排序链表, 快速排序*/
 void swap(struct ListNode *first, struct ListNode *second){
     int tmpValue = first->val;
     first->val = second->val;
@@ -128,5 +127,49 @@ struct ListNode *sortList(struct ListNode* head){
     
     quickSort(head, NULL);
     return head;
+}
+
+
+/**K个一组反转链表*/
+struct ListNode* reverseListK(struct ListNode* pre, int k){
+    
+    struct ListNode *rightNode = pre;
+    while (k) {
+        if(rightNode != NULL){
+            rightNode = rightNode->next;
+        }
+        k--;
+    }
+    if(rightNode != NULL){
+        struct ListNode *head = pre->next;
+        struct ListNode *last = head;
+        struct ListNode *cur = head->next;
+        head->next = rightNode->next;
+        while (cur != NULL && cur != rightNode) {
+            struct ListNode *tmp = cur->next;
+            cur->next = head;
+            head = cur;
+            cur = tmp;
+        }
+        rightNode->next = head;
+        pre->next = rightNode;
+        return last;
+    }else{
+        return NULL;
+    }
+    
+}
+
+struct ListNode* reverseKGroup(struct ListNode* head, int k){
+    if(k == 1){
+        return head;
+    }
+    struct ListNode h;
+    h.next = head;
+    struct ListNode *pre = &h;
+    while (pre != NULL) {
+        pre = reverseListK(pre, k);
+    }
+    return h.next;
 }
 
