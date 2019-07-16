@@ -32,10 +32,17 @@ public:
         ListNode *rNode = head;
 
         // 大于零停在被删节点的前一节点
-        while (n > 0)
+        while (n > 0 && rNode != nullptr)
         {
             rNode = rNode->next;
             n--;
+        }
+        
+        // 如果被删节点是头结点，由于题意表明 n 有效，故不再对 n 的值进行判断
+        if (n > 0) {
+            ListNode *node = head->next;
+            free(head);
+            return node;
         }
         
         while (rNode->next != nullptr)
