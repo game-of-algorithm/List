@@ -1,0 +1,12 @@
+package quicksort
+import (
+	"testing"
+)
+
+func TestQuickSort(t *testing.T){
+	values := []int{4,2,1,3}
+	QuickSort(values)
+	if values[0] != 1 || values[1] != 2 || values[2] != 3 || values[3] != 4 {
+		t.Error("test failed.", values)
+	}
+}
