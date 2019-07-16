@@ -1,3 +1,4 @@
+const print = require('./print')
 
 var sortList = function(head) {
     if (!head || !head.next) {
@@ -49,12 +50,6 @@ const head = {
                 }
             }
         }
-    }
-}
-const print = (head) => {
-    while (head) {
-        console.log(head.val)
-        head = head.next
     }
 }
 console.log(print(sortList(head)))
