@@ -1,6 +1,28 @@
 const head = Symbol("head")
 const tail = Symbol("tail")
 
+const swap = (a, b) => {
+  let tmp = a.value
+  a.value = b.value
+  b.value = tmp
+}
+const quickSort = (head, end) => {
+  if (head === end || head.next === end) return
+  let pivot = head.value
+  let slow = head
+  let fast = head.next
+  while (fast !== end) {
+    if (fast.value <= pivot) {
+      slow = slow.next
+      swap(slow, fast)
+    }
+    fast = fast.next
+  }
+  swap(head, slow)
+  quickSort(head, slow)
+  quickSort(slow.next, end)
+}
+
 class LinkedListNode {
   constructor (value) {
     this.value = value
@@ -30,8 +52,8 @@ export default class LinkedList {
     this[tail] = wantAddNode
   }
 
-  sort () {
-
+  quickSort() {
+    quickSort(this[head].next, null)
   }
 
   reversal () {
