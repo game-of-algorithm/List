@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /**
  * Definition for singly-linked list.
  * type ListNode struct {
@@ -26,5 +28,14 @@ func reverseList(head *ListNode) *ListNode {
 }
 
 func main() {
-
+	a := &ListNode{0, nil}
+	for i := 1; i <= 10; i += 1 {
+		t := &ListNode{i, nil}
+		t.Next = a
+		a = t
+	}
+	res := reverseList(a)
+	for h := res; h.Next != nil; h = h.Next {
+		fmt.Println(h.Val)
+	}
 }
