@@ -88,3 +88,59 @@ test('add one node to tail after reversal two node linkedList', () => {
   expect(testLinkedList.head.next.next.value).toBe(3)
   expect(testLinkedList.head.next.next.next).toBeNull()
 })
+
+test('sort null linkedList', () => {
+  let testLinkedList = new LinkedList()
+
+  testLinkedList.sort()
+
+  expect(testLinkedList.head).toBeNull()
+})
+
+test('remove one node from end when linkedList is null', () => {
+  let linkedList = new LinkedList()
+
+  linkedList.removeNthFromEnd(3)
+
+  expect(linkedList.head).toBeNull()
+})
+
+test('remove first node from end when linkedList has one node', () => {
+  let linkedList = new LinkedList()
+  linkedList.addToTail(1)
+
+  linkedList.removeNthFromEnd(1)
+  linkedList.addToTail(2)
+
+  expect(linkedList.head.value).toBe(2)
+  expect(linkedList.head.next).toBeNull()
+})
+
+test('remove first node from end when linkedList has two node', () => {
+  let linkedList = new LinkedList()
+  linkedList.addToTail(1)
+  linkedList.addToTail(2)
+
+  linkedList.removeNthFromEnd(1)
+  linkedList.addToTail(3)
+
+  expect(linkedList.head.value).toBe(1)
+  expect(linkedList.head.next.value).toBe(3)
+  expect(linkedList.head.next.next).toBeNull()
+})
+
+test('remove third node from end when linkedList has three node', () => {
+  let linkedList = new LinkedList()
+  linkedList.addToTail(1)
+  linkedList.addToTail(2)
+  linkedList.addToTail(3)
+
+  linkedList.removeNthFromEnd(3)
+  linkedList.addToTail(4)
+
+  expect(linkedList.head.value).toBe(2)
+  expect(linkedList.head.next.value).toBe(3)
+  expect(linkedList.head.next.next.value).toBe(4)
+  expect(linkedList.head.next.next.next).toBeNull()
+})
+

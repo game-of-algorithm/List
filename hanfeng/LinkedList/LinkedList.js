@@ -30,18 +30,41 @@ export default class LinkedList {
     this[tail] = wantAddNode
   }
 
+  sort () {
+
+  }
+
   reversal () {
     let preNode = null
-    let nextNode = null
     let currentNode = this[head].next
     this[tail] = currentNode || this[head]
     while (currentNode !== null) {
-      nextNode = currentNode.next
+      let nextNode = currentNode.next
       currentNode.next = preNode
       preNode = currentNode
       currentNode = nextNode
     }
-
     this[head].next = preNode
+  }
+
+  removeNthFromEnd (n) {
+    let p = this[head]
+    let q = this[head]
+
+    let moveNextTime = 0
+    while(moveNextTime !== n) {
+      moveNextTime++
+      p = p.next
+      if (p === null) {
+        return
+      }
+    }
+
+    while(p.next !== null) {
+      p = p.next
+      q = q.next
+    }
+    q.next = q.next.next
+    this[tail] = q.next === null ? q : p
   }
 }
