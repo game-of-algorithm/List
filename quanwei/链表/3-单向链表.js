@@ -44,6 +44,8 @@ class LinkList {
   }
 }
 
+module.exports = LinkList
+
 // const listNode = new LinkList()
 // listNode.append(1)
 // listNode.append(2)
