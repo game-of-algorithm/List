@@ -1,9 +1,10 @@
 package sort
 
 fun main() {
-    val arr = arrayOf(9,4,3,-1,1,0,5,6,7)
-    Sort().mergingSort(arr)
-    SortUtil.printArray(arr)
+    val arr = arrayOf(48, 46, 54, 97, 83, 69, 76, 25, 10, 5, 87, 12, 21, 99, 61, 33, 30, 47, 57, 4, 36, 42, 98, 66, 100, 17, 94, 81, 11, 77, 24, 89, 73, 53, 38, 7, 29, 8, 27, 23, 56, 70, 60, 85, 39, 65, 9, 75, 15, 67, 64, 22, 51, 82, 43, 3, 37, 91, 45, 13, 34, 63, 74, 71, 95, 55, 80, 92, 2, 19, 62, 40, 84, 41, 50, 88, 86, 59, 28, 44, 72, 68, 14, 35, 93, 26, 18, 78, 31, 58, 96, 6, 1, 90, 49, 16, 52, 79, 32, 20)
+    val arr1 = arrayOf(0,1,2,3,4,5,6,7)
+    Sort().shellSort(arr1)
+    SortUtil.printArray(arr1)
 }
 
 class Sort {
@@ -17,6 +18,7 @@ class Sort {
                     minIndex = j
                 }
             }
+            if(i != minIndex)
             SortUtil.swap(arr,i,minIndex)
         }
     }
@@ -33,16 +35,39 @@ class Sort {
 
     fun shellSort(arr: Array<Int>){
         var increment = arr.size
+        var countCompare = 0
+        var countSwap = 0
         do {
-            increment = increment /3 +1
+            increment = increment/3+1
             for (i in increment until arr.size){
                 var j = i - increment
-                while (j >= 0 && arr[j] > arr[j+increment]){
+                while (j >= 0 && ++countCompare > 0 && arr[j] > arr[j+increment] ){
+                    SortUtil.swap(arr,j,j+increment)
+                    j-=increment
+                    countSwap++
+                }
+            }
+        }while (increment > 1)
+
+        println(countCompare)
+        println(countSwap)
+    }
+
+    fun shellSort1(arr: Array<Int>){
+        var increment = 121
+        var count = 0
+        do {
+            increment = (increment-1) /3
+            for (i in increment until arr.size){
+                var j = i - increment
+                while (j >= 0 && ++count > 0 && arr[j] > arr[j+increment] ){
                     SortUtil.swap(arr,j,j+increment)
                     j-=increment
                 }
             }
         }while (increment > 1)
+
+        println(count)
     }
 
     fun mergingSort(arr: Array<Int>){
