@@ -1,5 +1,3 @@
-package org.test.unit1;
-
 /**
  * O(n log n) 并归排序
  * @author liyongpan

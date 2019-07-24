@@ -1,5 +1,3 @@
-package org.test.unit1;
-
 public class ReverseCode {
 
 	public static ListNode reverseList (ListNode head) {
@@ -11,7 +9,7 @@ public class ReverseCode {
 
 	// current = 当前递归项
 	/**
-	 * 
+	 *
 	 * @param head 新链表头
 	 * @param last 新链表尾
 	 * @param current 当前递归项
