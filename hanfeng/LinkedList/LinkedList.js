@@ -35,7 +35,7 @@ export default class LinkedList {
     const sentinelNode = new LinkedListNode(null)
     this[head] = sentinelNode
     this[tail] = sentinelNode
-  }
+}
 
   get head () {
     return this[head].next || null
