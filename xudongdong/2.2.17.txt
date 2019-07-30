@@ -1,0 +1,90 @@
+链表排序。实现对链表的自然排序(这是将链表排序的最佳方法，因为它不需要额外的空间，且运行时间是线性对数级别的)。
+
+时间复杂度为O(N*logN)，空间复杂度为O(1)
+public class MyClass3 {
+    public static void main(String[] args) {
+        ListNode n1 = new ListNode(11);
+        ListNode n2 = new ListNode(82);
+        ListNode n3 = new ListNode(33);
+        ListNode n4 = new ListNode(-4);
+        ListNode n5 = new ListNode(15);
+
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+        n4.next = n5;
+
+        print(mergeSort(n1));
+    }
+
+    public static void print(ListNode listNode){
+        if(listNode != null){
+            System.out.print(listNode.val + "  ");
+        }
+
+        if(listNode.next != null){
+            print(listNode.next);
+        }
+    }
+
+    //归并排序
+    public static ListNode mergeSort(ListNode head){
+        if(head == null || head.next == null)  //空链表或者只有单个结点
+            return head;
+        ListNode slow = head, fast = head.next;
+
+        while(fast != null && fast.next != null){  //使用快慢指针寻找中间 结点
+            slow = slow.next;
+
+            fast = fast.next;
+            if(fast.next != null)
+                fast = fast.next;
+        }
+
+        ListNode ptr1 = slow.next;
+        slow.next = null;
+
+        ListNode tmp1 = mergeSort(head);
+        ListNode tmp2 = mergeSort(ptr1);
+        return merge(tmp1, tmp2);
+    }
+
+    public static ListNode merge(ListNode start1,  ListNode start2){
+        ListNode header = new ListNode(-1);
+        ListNode pre = header;
+
+        ListNode ptr1 = start1, ptr2 = start2;
+        while(ptr1 != null && ptr2 != null){
+            if(ptr1.val <= ptr2.val){
+                pre.next = ptr1;
+                pre = ptr1;
+                ptr1 = ptr1.next;
+            }else{
+                pre.next = ptr2;
+                pre = ptr2;
+                ptr2 = ptr2.next;
+            }
+        }
+        while(ptr1 != null){
+            pre.next = ptr1;
+            pre = ptr1;
+            ptr1 = ptr1.next;
+        }
+
+        while(ptr2 != null){
+            pre.next = ptr2;
+            pre = ptr2;
+            ptr2 = ptr2.next;
+        }
+        return header.next;
+    }
+
+    static class ListNode{
+        int val;
+        ListNode next;
+
+        public ListNode(int val) {
+            this.val = val;
+        }
+    }
+}
