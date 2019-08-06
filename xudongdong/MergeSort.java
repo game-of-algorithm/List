@@ -1,43 +1,43 @@
 import java.util.Arrays;
 
 class MergeSort{
+    static int[] arr = {11, 2, 43, 44, 25, 16, 97, 8, -9};
+    static int len = arr.length;
+    static int[] aux = new int[len];
+
+
     public static void main(String[] args) {
-        int[] arr = {11, 2, 43, 44, 25, 16, 97, 8, -9};
-        int len = arr.length;
-        int[] result = new int[len];
-
         System.out.println(Arrays.toString(arr));
-        System.out.println(Arrays.toString(result));
-        System.out.println();
-
-        merge_sort_recursive(arr, result, 0, len - 1);
-
+        sort(arr, 0 , len - 1);
         System.out.println(Arrays.toString(arr));
-        System.out.println(Arrays.toString(result));
     }
 
-    private static void merge_sort_recursive(int[] arr, int[] result, int start, int end) {
-        if (start >= end)
+    private static void sort(int[] a,int lo, int hi) {
+        if (hi <= lo) {
             return;
-        int len = end - start, mid = (len >> 1) + start;
+        }
+        int mid = lo + (hi - lo) / 2;
+        sort(a, lo, mid);//左半边排序
+        sort(a, mid + 1, hi);//右半边排序
+        merge(a,lo, mid, hi);//归并结果（参考原地归并的抽象方法）
+    }
 
-        int start1 = start, end1 = mid;
-        int start2 = mid + 1, end2 = end;
+    public static void merge(int[] a, int lo, int mid, int hi) {
+        int i = lo, j = mid + 1;
+        for (int k = lo; k <= hi; k++) {
+            aux[k] = a[k];
+        }
+        for (int k = lo; k <= hi; k++) {
+            if (i > mid) {
+                a[k] = aux[j++];
+            } else if (j > hi) {
+                a[k] = aux[i++];
+            } else if (aux[i] < aux[j]) {
+                a[k] = aux[i++];
+            } else {
+                a[k] = aux[j++];
+            }
+        }
 
-        merge_sort_recursive(arr, result, start1, end1);
-        merge_sort_recursive(arr, result, start2, end2);
-
-        int k = start;
-        while (start1 <= end1 && start2 <= end2)
-            result[k++] = arr[start1] < arr[start2] ? arr[start1++] : arr[start2++];
-
-        while (start1 <= end1)
-            result[k++] = arr[start1++];
-
-        while (start2 <= end2)
-            result[k++] = arr[start2++];
-
-        for (k = start; k <= end; k++)
-            arr[k] = result[k];
     }
 }
