@@ -87,102 +87,124 @@ class Node {
 }
 
 //链表原地归并
-func mergeNode(head: Node, mid: Node, high: Node) {
-    var lowNode = head, midNode = mid.next, highNode = high
+func mergeNode(head: Node, mid: Node, high: Node) -> (Node, Node) {
+    if(mid.next === nil){
+        return (head, high)
+    }
+    var lowNode = head.next, midNode = mid.next, highNode = high
     
-    var newHead = Node(-1)
-    while newHead !== high {
-        if(lowNode.val > midNode!.val){
-            newHead.next = midNode
-            newHead = newHead.next!
+    var cur = head //前一个结点，保证链表前后链接连贯
+    let pre = Node(-1)
+    while head !== high {
+        if(lowNode!.val > midNode!.val){
+            cur.next = midNode
+            cur = cur.next!
+            if(pre.next === nil){
+                pre.next = midNode
+            }
             if(midNode === highNode){
-                newHead.next = lowNode
-                mid.next = highNode.next
-                return
+                let tmp = cur.next
+                cur.next = lowNode
+                mid.next = tmp
+                return (pre.next!, mid)
             }else{
                 midNode = midNode!.next
             }
         }else{
-            newHead.next = lowNode
-            newHead = newHead.next!
+            cur.next = lowNode
+            cur = cur.next!
+            if(pre.next === nil){
+                pre.next = lowNode
+            }
             if(lowNode === mid){
-                newHead.next = midNode
-                return
+                cur.next = midNode
+                return (pre.next!, high)
             }else{
-                lowNode = lowNode.next!
+                lowNode = lowNode?.next!
             }
         }
     }
+    return (pre.next!, high)
 }
 
-func sortListNode(head: Node) {
-    let length = array.count
-    var size = 1
+func sortListNode(head: Node, size: Int) -> (Node) {
     
-//    while size < length {
+    var pre = Node(-1)
+    let new = Node(-1)
+        if(pre.next === nil){
+            pre.next = head
+        }
         var low = head
         while low.next !== nil{
-            var slow = low
-            var fast = low
-            for i in 1...size{
-                if(i == 1){
-                    if(fast.next != nil){
-                        fast = fast.next!;
-                    }
-                }else{
+            var slow = pre
+            var fast = pre
+            for _ in 1...size{
+                if(slow.next != nil){
                     slow = slow.next!
+                }
+                if(fast.next != nil){
                     fast = fast.next!
-                    if(fast.next != nil){
-                        fast = fast.next!;
-                    }
+                }
+                if(fast.next != nil){
+                    fast = fast.next!;
                 }
             }
-            mergeNode(head: low, mid: slow, high: fast)
-            if(fast.next != nil){
-                low = fast.next!
+            let result = mergeNode(head: pre, mid: slow, high: fast)
+            if(new.next === nil){
+                new.next = result.0
             }
-            print(low.val)
+            pre = result.1
+            low = pre.next ?? (Node(-1))
         }
-//        print(size)
-//        size += size
-//    }
+    return new.next!
 }
 
 
 func testMergeNodeList() {
     let node1 = Node(5)
-    let node2 = Node(2)
+    let node2 = Node(5)
     let node3 = Node(3)
     let node4 = Node(7)
-//    let node5 = Node(4)
-//    let node6 = Node(2)
-//    let node7 = Node(5)
-//    let node8 = Node(4)
-//    let node9 = Node(9)
-//    let node10 = Node(1)
-//    let node11 = Node(8)
-//    let node12 = Node(6)
+    let node5 = Node(4)
+    let node6 = Node(2)
+    let node7 = Node(5)
+    let node8 = Node(4)
+    let node9 = Node(9)
+    let node10 = Node(1)
+    let node11 = Node(8)
+    let node12 = Node(6)
     node1.next = node2
     node2.next = node3
     node3.next = node4
-    node4.next = nil
-//    node5.next = node6
-//    node6.next = node7
-//    node7.next = node8
-//    node8.next = node9
-//    node9.next = node10
-//    node10.next = node11
-//    node11.next = node12
-//    node12.next = nil
+    node4.next = node5
+    node5.next = node6
+    node6.next = node7
+    node7.next = node8
+    node8.next = node9
+    node9.next = node10
+    node10.next = node11
+    node11.next = node12
+    node12.next = nil
     
-    sortListNode(head: node1)
+    let head = Node(-1)
+    head.next = node1
+    
+    let length = 12
+    var size = 1
     var node = node1
+    while size < length {
+        node = sortListNode(head: node, size: size)
+        size += size
+    }
+    
     while node.next !== nil {
         print(node.val)
         if(node.next !== nil){
             node = node.next!
         }
     }
+    print(node.val)
+    
 }
 
 testMergeNodeList()
