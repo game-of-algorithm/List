@@ -23,6 +23,7 @@ const merge = (array, lo, mid, hi) => {
             i++
             continue
         }
+        console.log('---',j)
         if (copyArray[j] < copyArray[i]) {
             array[k] = copyArray[j]
             j++
@@ -31,4 +32,8 @@ const merge = (array, lo, mid, hi) => {
             i++
         }
     }
+    console.log(array)
+    return array
 }
+merge([5,6,7,1,2,3], 0, 2, 5)
+merge([1,4,3,7,8,9], 0, 2, 5)
