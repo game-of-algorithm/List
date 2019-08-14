@@ -34,3 +34,12 @@ test('Shell Sort', () => {
   expect(testArray[3]).toBe(4)
   expect(testArray[4]).toBe(8)
 })
+
+test('Merge Sort', () => {
+  ArraySortHelper.mergeSort(testArray)
+  expect(testArray[0]).toBe(0)
+  expect(testArray[1]).toBe(1)
+  expect(testArray[2]).toBe(2)
+  expect(testArray[3]).toBe(4)
+  expect(testArray[4]).toBe(8)
+})
