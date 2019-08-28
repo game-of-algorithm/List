@@ -23,4 +23,5 @@ const quickSort = (array) => {
     quick(array, 0, array.length - 1)
     return array
 }
+
 console.log(quickSort([3,6,8,2,1]))
