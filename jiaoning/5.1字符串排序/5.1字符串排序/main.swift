@@ -16,7 +16,7 @@ func charAt(s: String, d: Int) -> Int {
 //        let a = UnicodeScalar(String.init(char))
         return dic[String.init(char)]!
     }
-    return -1;
+    return 0;
 }
 
 func sort(a: inout [String], low: Int, high: Int, d: Int) {
@@ -25,24 +25,33 @@ func sort(a: inout [String], low: Int, high: Int, d: Int) {
     var count = Array.init(repeating: 0, count: R+2)
     if low < high {
         for i in low...high {
-            count[charAt(s: a[i], d: d) + 1] += 1; //计算频率
+            count[charAt(s: a[i], d: d) + 1] += 1 //计算频率
         }
         //频率转换为索引
-        for r in 0...R+1 {
+        for r in 0...R {
             count[r+1] += count[r]
         }
         //数据分类
         for i in low...high {
             aux[count[charAt(s: a[i], d: d)]] = a[i]
+            count[charAt(s: a[i], d: d)] += 1
         }
         //回写
         for i in low...high {
             a[i] = aux[i - low]
         }
+        print(a)
         //递归
         for i in 0..<R {
-            sort(a: &a, low: low + count[r], high: low + count[r+1], d: d+1)
+            sort(a: &a, low: low + count[i], high: low + count[i+1]-1, d: d+1)
         }
     }
 }
 
+func main() {
+    var array = ["not", "is", "the", "time", "for", "all", "good", "people", "to", "come", "to", "aid", "of"]
+    sort(a: &array, low: 0, high: array.count-1, d: 1)
+    
+}
+
+main()
