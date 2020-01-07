@@ -223,6 +223,32 @@ func invertTree(_ root: TreeNode?) -> TreeNode? {
     return root
 }
 
+func allSum() {
+    let N = 20
+    var sum = [Int]()
+    var product = [Int]()
+    var sumIJ = [(Int, Int)]()
+    var productIJ = [(Int, Int)]()
+    
+    for i in 1..<N {
+        for j in i+1...N {
+            if !sum.contains(i+j){
+                sum.append(i+j)
+            }else{
+                sumIJ.append((i, j))
+            }
+        }
+    }
+    for tup in sumIJ {
+        if !product.contains(tup.0*tup.1){
+            product.append(tup.0*tup.1)
+        }else{
+            productIJ.append(tup)
+        }
+    }
+     print(productIJ)
+}
+
 func main() {
     let root = initTree()
     print("前序遍历:\n")
@@ -242,6 +268,7 @@ func main() {
     print(treeDeep(root: root))
     print(treeDeepNormal(root: root))
     
+    allSum()
 //    invertTree(root)
 //    print(treeDeepNormal(root: invertTree(root)))
 }

@@ -25,15 +25,17 @@ import Foundation
 
 func findCheapestPrice(_ n: Int, _ flights: [[Int]], _ src: Int, _ dst: Int, _ K: Int) -> Int {
     var dist = [[Int]]()
-    for _ in 0..<n {
-        dist.append([Int.max, Int.max])
-    }
+    let max = Int.max / 2
+    dist.append(Array.init(repeating: max, count: n))
+    dist.append(Array.init(repeating: max, count: n))
+    dist[0][src] = 0
+    dist[1][src] = 0
     for i in 0...K {
         for edge in flights {
-            dist[i][edge[1]]
+            dist[i&1][edge[1]] = min(dist[i&1][edge[1]], dist[~i&1][edge[0]] + edge[2])
         }
     }
-    
+    return dist[K&1][dst] < max ? dist[K&1][dst] : -1
 }
 
 func main() {
