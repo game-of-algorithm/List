@@ -48,10 +48,40 @@ func sort(a: inout [String], low: Int, high: Int, d: Int) {
     }
 }
 
+func quick3String(a: inout [String], low: Int, high: Int, d: Int) {
+    if low >= high {
+        return
+    }
+    var left = low
+    var right = high
+    let v = charAt(s: a[left], d: d)
+    
+    var i = left + 1
+    while i <= right {
+        let cur = charAt(s: a[i], d: d);
+        if cur < v {
+            a.swapAt(i, left)
+            i += 1
+            left += 1
+        } else if cur > v {
+            a.swapAt(i, right)
+            right -= 1
+        } else {
+            i += 1
+        }
+    }
+    quick3String(a: &a, low: low, high: left-1, d: d)
+    if v > 0 {
+        quick3String(a: &a, low: left, high: right, d: d+1)
+    }
+    quick3String(a: &a, low: right + 1, high: high, d: d)
+}
+
 func main() {
     var array = ["not", "is", "the", "time", "for", "all", "good", "people", "to", "come", "to", "aid", "of"]
-    sort(a: &array, low: 0, high: array.count-1, d: 1)
-    
+//    sort(a: &array, low: 0, high: array.count-1, d: 1)
+    quick3String(a: &array, low: 0, high: array.count - 1, d: 1)
+    print(array)
 }
 
 main()
